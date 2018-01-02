@@ -1,0 +1,161 @@
+{
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "env": {
+        "es6": true,
+        "browser": true
+    },
+    "plugins": [
+        "classes",
+        "html"
+    ],
+    "globals": {
+        "Vue": true,
+        "Vuex": true
+    },
+    "root": true,
+    "extends": [
+        "eslint:recommended",
+        "standard"
+    ],
+    "rules": {
+        "for-direction": "error",
+        "getter-return": "error",
+        "no-await-in-loop": "error",
+        "no-empty": [
+            "error",
+            { "allowEmptyCatch": true }
+        ],
+        "no-empty-function": [
+            "error",
+            { "allow": ["constructors"] }
+        ],
+        "no-prototype-builtins": "error",
+        "accessor-pairs": [
+            "error",
+            {
+                "getWithoutSet": false
+            }
+        ],
+        "block-scoped-var": "error",
+        "curly": ["error", "all"],
+        "class-methods-use-this": "error",
+        "no-else-return": "error",
+        "no-eq-null": "error",
+        "no-extra-label": "error",
+        "no-implicit-coercion": "error",
+        "no-invalid-this": "error",
+        "no-loop-func": "error",
+        "no-script-url": "error",
+        "no-self-compare": "error",
+        "no-useless-concat": "error",
+        "quotes": ["error", "single", "avoid-escape"],
+        "require-await": "error",
+        "no-shadow": "error",
+        "array-bracket-newline": ["error", "consistent"],
+        "array-bracket-spacing": "error",
+        "block-spacing": "error",
+        "computed-property-spacing": "error",
+        "consistent-this": "error",
+        "func-style": [
+            "error",
+            "expression",
+            { "allowArrowFunctions": true }
+        ],
+        "function-paren-newline": ["error", "never"],
+        "implicit-arrow-linebreak": ["error"],
+        "indent": ["error", 4],
+        "lines-around-comment": [
+            "error",
+            {
+                "beforeBlockComment": true,
+                "afterBlockComment": false
+            }
+        ],
+        "lines-between-class-members": ["error", "always"],
+        "no-lonely-if": "error",
+        "no-underscore-dangle": "error",
+        "object-curly-newline": "error",
+        "object-curly-spacing": "error",
+        "object-property-newline": "error",
+        "operator-linebreak": ["error", "none"],
+        "quote-props": ["error", "as-needed"],
+        "semi": ["error", "always"],
+        "semi-style": ["error", "last"],
+        "switch-colon-spacing": ["error"],
+        "arrow-body-style": ["error", "always"],
+        "arrow-parens": "error",
+        "no-duplicate-imports": "error",
+        "no-obj-calls": "error",
+        "object-shorthand": "error",
+        "prefer-arrow-callback": [
+            "error",
+            {
+                "allowNamedFunctions": true,
+                "allowUnboundThis": true
+            }
+        ],
+        "prefer-const": "error",
+        "prefer-spread": "error",
+        "rest-spread-spacing": ["error", "never"],
+        "template-curly-spacing": ["error", "never"],
+        "max-nested-callbacks": ["error", 3],
+        "max-params": ["error", 5],
+        "max-depth": ["error", 8],
+        "complexity": ["error", 10],
+        "default-case": "warn",
+        "no-console": [
+            "warn",
+            { "allow": ["warn", "error"] }
+        ],
+        "no-func-assign": "warn",
+        "no-inner-declarations": ["warn", "both"],
+        "no-debugger": "warn",
+        "no-alert": "warn",
+        "dot-notation": "warn",
+        "no-magic-numbers": ["warn", {
+            "ignoreArrayIndexes": true,
+            "enforceConst": true
+        }],
+        "no-warning-comments": "warn",
+        "vars-on-top": "warn",
+        "multiline-comment-style": "warn",
+        "no-var": "warn",
+        "prefer-rest-params": "warn",
+        "require-jsdoc": [
+            "warn",
+            {
+                "require": {
+                    "FunctionDeclaration": true,
+                    "MethodDefinition": true,
+                    "ClassDeclaration": false,
+                    "ArrowFunctionExpression": true,
+                    "FunctionExpression": true
+                }
+            }
+        ],
+        "valid-jsdoc": [
+            "error",
+            {
+                "prefer": {
+                    "arg": "param",
+                    "argument": "param",
+                    "constructor": "class",
+                    "return": "returns",
+                    "virtual": "abstract"
+                },
+                "preferType": {
+                    "Object": "object"
+                }
+            }
+        ],
+        "classes/space": ["error"],
+        "classes/name": ["error", "class", "method"],
+        "classes/constructor": "error",
+        "classes/super": "error",
+        "classes/style": "error",
+        "no-new": "off"
+    }
+}

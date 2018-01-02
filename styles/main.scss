@@ -1,0 +1,32 @@
+@import './import';
+
+%test {
+    background-color: #000;
+}
+
+body {
+    $white: #fff;
+    display: flex;
+    color: $white;
+    background: url('../images/tile.jpg') no-repeat;
+    background-size: cover;
+    border: 0.5px;
+
+    @extend %test;
+
+    &.test-foo {
+        flex: 1 0 calc(10px - 1px);
+    }
+}
+
+div {
+    color: #fff;
+
+    @extend %test;
+}
+
+p {
+    color: #fff;
+
+    @extend %test;
+}

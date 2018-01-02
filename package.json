@@ -1,0 +1,66 @@
+{
+  "name": "vuescssssr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "webpack-dev-server --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martiensk/VueScssSSR.git"
+  },
+  "author": "Martiens Kropff",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martiensk/VueScssSSR/issues"
+  },
+  "homepage": "https://github.com/martiensk/VueScssSSR#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.3",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "clean-webpack-plugin": "^0.1.17",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.14.0",
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-classes": "^0.1.1",
+    "eslint-plugin-html": "^4.0.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^3.14.0",
+    "extract-loader": "^1.0.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.7.2",
+    "postcss-combine-duplicated-selectors": "^3.1.4",
+    "postcss-flexbugs-fixes": "^3.2.0",
+    "postcss-loader": "^2.0.9",
+    "postcss-merge-selectors": "0.0.6",
+    "sass-loader": "^6.0.6",
+    "stylelint": "^8.4.0",
+    "stylelint-config-recess-order": "^1.2.3",
+    "stylelint-config-recommended": "^2.0.1",
+    "stylelint-config-recommended-scss": "^3.0.0",
+    "stylelint-scss": "^2.2.0",
+    "stylelint-webpack-plugin": "^0.9.0",
+    "vue": "^2.5.13",
+    "vue-loader": "^13.6.2",
+    "vue-template-compiler": "^2.5.13",
+    "vuex": "^3.0.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}

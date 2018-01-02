@@ -1,0 +1,60 @@
+h1 {
+    border: 1px solid #fff;
+}
+
+/* Block */
+
+.checkout {
+    color: #fff;
+
+    /* Standalone Elements */
+
+    .submit {
+        color: #000;
+    }
+}
+
+/* Block */
+
+article {
+    color: #fff;
+
+    /* Standalone Element */
+
+    button {
+        color: #000;
+
+        &[type=submit] {
+            color: #0f0;
+        }
+
+        &[type=reset] {
+            color: #f00;
+        }
+
+        &.color {
+
+            &-blue {
+                color: #00f;
+            }
+            
+            &-yellow {
+                color: #ff0;
+            }
+        }
+
+        /* State */
+
+        &.loading {
+            background-color: #0ff;
+        }
+
+        &:hover {
+            background-color: #665;
+        }
+
+        &:disabled {
+            background-color: #ccc;
+        }
+    }
+}

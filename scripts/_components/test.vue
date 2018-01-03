@@ -7,9 +7,10 @@
 
 <script>
     const test = 'Hello World!';
+
     export default {
         name: 'Test',
-
+    
         /**
          * @description: Created the Vue data object
          * @returns {void}

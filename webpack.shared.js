@@ -9,7 +9,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+/* const WorkboxPlugin = require('workbox-webpack-plugin'); */
+/*const { VueSSRClientPlugin } = require('vue-ssr-webpack-plugin')*/
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 /**
@@ -20,7 +21,7 @@ module.exports = (env) => {
     return { 
         entry: ['core-js/fn/promise', 'vue', 'vuex', './scripts/entry.js'],
         output: {
-            filename: env === 'development' ? 'js/script.js' : 'js/[chunkhash].js',
+            filename: env === 'development' ? 'js/[name].js' : 'js/[chunkhash].js',
             path: env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist')
         },
         module: {
@@ -169,15 +170,25 @@ function getPlugins(env){
             title: 'Test',
             filename: 'views/index.html',
             template: './views/index.html',
-            inject: false
+            inject: false,
+            minify: {
+                collapseBooleanAttributes: true,
+                collapseInlineTagWhitespace: true,
+                collapseWhitespace: true
+            }
         }),
-        new WorkboxPlugin({
+        /*new webpack.optimize.CommonsChunkPlugin({
+            name: 'manifest',
+            minChunks: Infinity,
+        }),
+        new VueSSRClientPlugin()
+        /*new WorkboxPlugin({
             globDirectory: env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist'),
-            globPatterns: ['**/*.{html,js,css}'],
+            globPatterns: ['**//*.{html,js,css}'],
             swDest: path.join(env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist'), 'sw.js'),
             clientsClaim: true,
             skipWaiting: true
-        })
+        })*/
     ]
 
     if(env === 'development') {
@@ -201,6 +212,7 @@ function getPlugins(env){
             cssProcessorOptions: { discardComments: {removeAll: true } },
             canPrint: true
         }));
+        pluginPack.push(new BundleAnalyzerPlugin());
     }
 
     return pluginPack;

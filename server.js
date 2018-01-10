@@ -2,23 +2,25 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const Vue = require('vue');
-const renderer = require('vue-server-renderer').createRenderer({
-    template: require('fs').readFileSync(path.join(__dirname, '/dist/views/index.html'), 'utf-8')
-});
+const { createBundleRenderer } = require('vue-server-renderer');
+const ssr = require('./scripts/entry.server');
+
+const renderer = createBundleRenderer(ssr, {
+  runInNewContext: true,
+  template: './dist/views/index.html'
+})
 
 app.use(express.static(__dirname + '/dist'));
 
 app.get('*', (req, res) => {
-    const app = new Vue({
-        template: `<h1>Hello World!</h1>`
-      })
+    const context = 'Hello World!';
     
-      renderer.renderToString(app, (err, html) => {
+      renderer.renderToString(context, (err, html) => {
         if (err) {
           res.status(500).end('Internal Server Error')
           return
         }
-        res.end(`${html}`)
+        res.end(html);
       })
 });
 

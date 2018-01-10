@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack')
 const vue = require('vue');
 const vuex = require('vuex');
+const merge = require('webpack-merge');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,7 +11,6 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 /* const WorkboxPlugin = require('workbox-webpack-plugin'); */
-/*const { VueSSRClientPlugin } = require('vue-ssr-webpack-plugin')*/
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 /**
@@ -18,8 +18,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
  * @returns {object} A webpack configuration based on the supplied environment string.
  */
 module.exports = (env) => {
-    return { 
-        entry: ['core-js/fn/promise', 'vue', 'vuex', './scripts/entry.js'],
+    return {
+        entry: ['core-js/fn/promise', 'vue', 'vuex', './scripts/entry.client.js'],
         output: {
             filename: env === 'development' ? 'js/[name].js' : 'js/[chunkhash].js',
             path: env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist')
@@ -129,13 +129,13 @@ const getRules = (env) => {
                 {
                     loader: 'style-loader'
                 },
-                    {
-                        loader: 'css-loader'
-                    },
-                    {
-                        loader: 'postcss-loader'
-                    }
-                ]
+                {
+                    loader: 'css-loader'
+                },
+                {
+                    loader: 'postcss-loader'
+                }
+            ]
         },
         {
             enforce: 'post',
@@ -156,7 +156,7 @@ const getRules = (env) => {
     return env === 'development' ? rules.concat(devRules) : rules.concat(prodRules);
 }
 
-function getPlugins(env){
+function getPlugins(env) {
     let pluginPack = [
         new webpack.DefinePlugin({
             'process.env': {
@@ -185,13 +185,13 @@ function getPlugins(env){
         /*new WorkboxPlugin({
             globDirectory: env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist'),
             globPatterns: ['**//*.{html,js,css}'],
-            swDest: path.join(env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist'), 'sw.js'),
-            clientsClaim: true,
-            skipWaiting: true
-        })*/
+    swDest: path.join(env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist'), 'sw.js'),
+    clientsClaim: true,
+    skipWaiting: true
+})*/
     ]
 
-    if(env === 'development') {
+    if (env === 'development') {
         pluginPack.push(new CleanWebpackPlugin(['build']));
     } else {
         pluginPack.push(new CleanWebpackPlugin(['dist']));
@@ -209,7 +209,7 @@ function getPlugins(env){
         }));
         pluginPack.push(new OptimizeCssAssetsPlugin({
             cssProcessor: require('cssnano'),
-            cssProcessorOptions: { discardComments: {removeAll: true } },
+            cssProcessorOptions: { discardComments: { removeAll: true } },
             canPrint: true
         }));
         pluginPack.push(new BundleAnalyzerPlugin());

@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "webpack-dev-server --hot --inline --open --config webpack.dev.js",
-    "prod": "webpack --config webpack.prod.js"
+    "prod": "webpack --config webpack.prod.js",
+    "ssr": "webpack --config webpack.server.js"
   },
   "repository": {
     "type": "git",
@@ -75,6 +76,8 @@
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.9.1",
     "webpack-dev-server": "^2.9.7",
+    "webpack-merge": "^4.1.1",
+    "webpack-node-externals": "^1.6.0",
     "workbox-webpack-plugin": "^2.1.2"
   },
   "dependencies": {

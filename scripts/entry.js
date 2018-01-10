@@ -1,10 +1,13 @@
 import Vue from 'vue';
-import Test from './_components/test';
-// import PWA from './pwa';
-import '../styles/critical.scss';
-import '../styles/main.scss';
-import '../images/webpack.svg';
+import Test from './_components/Test';
 
-// PWA();
+/**
+ * @description Creates a new Vue instance and with the Test component loaded.
+ * @returns {object} A new Vue instance.
+ */
+const TestComponent = () => {
+    const app = new Vue({render: (h) => { return h(Test); }});
+    return app;
+};
 
-new Vue({render: (h) => { return h(Test); }}).$mount('#app');
+export default TestComponent;

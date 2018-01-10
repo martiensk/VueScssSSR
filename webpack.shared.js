@@ -17,7 +17,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
  * @param {string} env The node environment as a string.
  * @returns {object} A webpack configuration based on the supplied environment string.
  */
-module.exports = (env) => {
+module.exports = (env, ssr = false) => {
     return {
         entry: ['core-js/fn/promise', 'vue', 'vuex', './scripts/entry.client.js'],
         output: {
@@ -30,7 +30,7 @@ module.exports = (env) => {
         resolve: {
             extensions: ['.js', '.vue', '.scss']
         },
-        plugins: getPlugins(env)
+        plugins: getPlugins(env, ssr)
     }
 };
 
@@ -156,7 +156,7 @@ const getRules = (env) => {
     return env === 'development' ? rules.concat(devRules) : rules.concat(prodRules);
 }
 
-function getPlugins(env) {
+function getPlugins(env, ssr) {
     let pluginPack = [
         new webpack.DefinePlugin({
             'process.env': {
@@ -194,7 +194,7 @@ function getPlugins(env) {
     if (env === 'development') {
         pluginPack.push(new CleanWebpackPlugin(['build']));
     } else {
-        pluginPack.push(new CleanWebpackPlugin(['dist']));
+        !ssr && pluginPack.push(new CleanWebpackPlugin(['dist']));
         pluginPack.push(new UglifyJsPlugin({
             uglifyOptions: {
                 ie8: false,
@@ -212,7 +212,7 @@ function getPlugins(env) {
             cssProcessorOptions: { discardComments: { removeAll: true } },
             canPrint: true
         }));
-        pluginPack.push(new BundleAnalyzerPlugin());
+        !ssr && pluginPack.push(new BundleAnalyzerPlugin());
     }
 
     return pluginPack;

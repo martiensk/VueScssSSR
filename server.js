@@ -1,13 +1,14 @@
 const path = require('path');
+const fs = require('fs');
 const express = require('express');
 const app = express();
 const Vue = require('vue');
 const { createBundleRenderer } = require('vue-server-renderer');
-const ssr = require('./scripts/entry.server');
+//const ssr = require('./scripts/entry.server');
 
 const renderer = createBundleRenderer(ssr, {
   runInNewContext: true,
-  template: './dist/views/index.html'
+  template: require('fs').readFileSync('./dist/views/index.html')
 })
 
 app.use(express.static(__dirname + '/dist'));

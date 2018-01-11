@@ -21,7 +21,7 @@ module.exports = (env, ssr = false) => {
     return {
         entry: ['core-js/fn/promise', 'vue', 'vuex', './scripts/entry.client.js'],
         output: {
-            filename: env === 'development' ? 'js/[name].js' : 'js/[chunkhash].js',
+            filename: env === 'development' ? 'js/[name].js' : 'js/[name].js',
             path: env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist')
         },
         module: {
@@ -212,7 +212,7 @@ function getPlugins(env, ssr) {
             cssProcessorOptions: { discardComments: { removeAll: true } },
             canPrint: true
         }));
-        !ssr && pluginPack.push(new BundleAnalyzerPlugin());
+        //!ssr && pluginPack.push(new BundleAnalyzerPlugin());
     }
 
     return pluginPack;

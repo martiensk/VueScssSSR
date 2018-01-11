@@ -4,8 +4,7 @@
     <title>Just a test</title>
 </head>
 <body>
-    <!--vue-ssr-outlet-->
-    <div id="app"></div>
+    <div id="app"><!--vue-ssr-outlet--></div>
     <% for (var css in htmlWebpackPlugin.files.css) { %>
         <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css[css] %>">
     <% } %>

@@ -22,7 +22,7 @@
 </script>
 
 <style lang="scss" scoped>
-    $color: #f00;
+    $color: #0f0;
 
     h1 {
         color: $color;

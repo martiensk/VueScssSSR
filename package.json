@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "webpack-dev-server --hot --inline --open --config webpack.dev.js",
-    "prod": "webpack --config webpack.prod.js",
+    "prod": "webpack --config webpack.prod.js && webpack --config webpack.server.js",
     "ssr": "webpack --config webpack.server.js"
   },
   "repository": {

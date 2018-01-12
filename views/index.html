@@ -2,11 +2,20 @@
 <html>
 <head>
     <title>Just a test</title>
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+        <% if (htmlWebpackPlugin.files.css[css].indexOf('critical.css') != -1) { %>
+            <style>
+                <%= compilation.assets[htmlWebpackPlugin.files.css[css].substr(htmlWebpackPlugin.files.publicPath.length)].source() %>
+            </style>
+        <% } %>
+    <% } %>
 </head>
 <body>
     <div id="app"><!--vue-ssr-outlet--></div>
     <% for (var css in htmlWebpackPlugin.files.css) { %>
-        <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css[css] %>">
+        <% if (htmlWebpackPlugin.files.css[css].indexOf('critical.css') < 0) { %>
+            <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css[css] %>">
+        <% } %>
     <% } %>
     <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
         <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>" defer></script>

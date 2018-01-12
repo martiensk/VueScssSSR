@@ -13,6 +13,15 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 /* const WorkboxPlugin = require('workbox-webpack-plugin'); */
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+const criticalCSS = new ExtractTextPlugin({
+    filename: 'css/critical.css',
+    allChunks: true
+});
+const mainCSS = new ExtractTextPlugin({
+    filename: 'css/[contenthash].css',
+    allChunks: true
+});
+
 /**
  * @param {string} env The node environment as a string.
  * @returns {object} A webpack configuration based on the supplied environment string.
@@ -21,7 +30,7 @@ module.exports = (env, ssr = false) => {
     return {
         entry: ['core-js/fn/promise', 'vue', 'vuex', './scripts/entry.client.js'],
         output: {
-            filename: env === 'development' ? 'js/[name].js' : 'js/[name].js',
+            filename: env === 'development' ? 'js/[name].js' : 'js/[chunkhash].js',
             path: env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist')
         },
         module: {
@@ -125,22 +134,21 @@ const getRules = (env) => {
         {
             enforce: 'post',
             test: /critical.scss/,
-            use: [
-                {
-                    loader: 'style-loader'
-                },
-                {
-                    loader: 'css-loader'
-                },
-                {
-                    loader: 'postcss-loader'
-                }
-            ]
+            loader: criticalCSS.extract({
+                use: [
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'postcss-loader'
+                    }
+                ]
+            })
         },
         {
             enforce: 'post',
             test: /main.scss/,
-            loader: ExtractTextPlugin.extract({
+            loader: mainCSS.extract({
                 use: [
                     {
                         loader: 'css-loader'
@@ -177,18 +185,13 @@ function getPlugins(env, ssr) {
                 collapseWhitespace: true
             }
         }),
-        /*new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest',
-            minChunks: Infinity,
-        }),
-        new VueSSRClientPlugin()
         /*new WorkboxPlugin({
             globDirectory: env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist'),
             globPatterns: ['**//*.{html,js,css}'],
-    swDest: path.join(env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist'), 'sw.js'),
-    clientsClaim: true,
-    skipWaiting: true
-})*/
+            swDest: path.join(env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist'), 'sw.js'),
+            clientsClaim: true,
+            skipWaiting: true
+        })*/
     ]
 
     if (env === 'development') {
@@ -203,16 +206,15 @@ function getPlugins(env, ssr) {
                 }
             }
         }));
-        pluginPack.push(new ExtractTextPlugin({
-            filename: 'css/[contenthash].css',
-            allChunks: true
-        }));
+        pluginPack.push(criticalCSS);
+        pluginPack.push(mainCSS);
         pluginPack.push(new OptimizeCssAssetsPlugin({
             cssProcessor: require('cssnano'),
             cssProcessorOptions: { discardComments: { removeAll: true } },
             canPrint: true
         }));
-        //!ssr && pluginPack.push(new BundleAnalyzerPlugin());
+        pluginPack.push(new StyleExtHtmlWebpackPlugin('css/critical.css'));
+        !ssr && pluginPack.push(new BundleAnalyzerPlugin());
     }
 
     return pluginPack;

@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/martiensk/VueScssSSR#readme",
   "devDependencies": {
+    "assets-webpack-plugin": "^3.5.1",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",
     "babel-loader": "^7.1.2",

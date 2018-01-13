@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Just a test</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
     <% for (var css in htmlWebpackPlugin.files.css) { %>
         <% if (htmlWebpackPlugin.files.css[css].indexOf('critical.css') != -1) { %>
             <style>

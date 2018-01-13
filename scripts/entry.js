@@ -1,13 +1,13 @@
 import Vue from 'vue';
-import Test from './_components/Test';
+import Main from './_components/main';
 
 /**
- * @description Creates a new Vue instance and with the Test component loaded.
+ * @description Creates a new Vue instance and with the Main component loaded - the main component being the one at /.
  * @returns {object} A new Vue instance.
  */
-const TestComponent = () => {
-    const app = new Vue({render: (h) => { return h(Test); }});
+const MainComponent = () => {
+    const app = new Vue({render: (h) => { return h(Main); }});
     return app;
 };
 
-export default TestComponent;
+export default MainComponent;

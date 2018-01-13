@@ -175,7 +175,7 @@ function getPlugins(env, ssr) {
             'fix': env === 'development' ? false : true
         }),
         new HtmlWebpackPlugin({
-            title: 'Test',
+            title: 'Coming Soon',
             filename: 'views/index.html',
             template: './views/index.html',
             inject: false,
@@ -184,20 +184,13 @@ function getPlugins(env, ssr) {
                 collapseInlineTagWhitespace: true,
                 collapseWhitespace: true
             }
-        }),
-        /*new WorkboxPlugin({
-            globDirectory: env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist'),
-            globPatterns: ['**//*.{html,js,css}'],
-            swDest: path.join(env === 'development' ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'dist'), 'sw.js'),
-            clientsClaim: true,
-            skipWaiting: true
-        })*/
+        })
     ]
 
     if (env === 'development') {
         pluginPack.push(new CleanWebpackPlugin(['build']));
     } else {
-        !ssr && pluginPack.push(new CleanWebpackPlugin(['dist']));
+        ssr && pluginPack.push(new CleanWebpackPlugin(['dist']));
         pluginPack.push(new UglifyJsPlugin({
             uglifyOptions: {
                 ie8: false,
